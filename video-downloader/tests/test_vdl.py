@@ -1,4 +1,4 @@
-"""Offline tests for the Video Downloader engine: python3 -m unittest discover -s tests"""
+"""Offline tests for the Video Downloader engine: python3 -m unittest discover tests"""
 
 import os
 import sys
@@ -66,17 +66,18 @@ class FormatSelectionTest(unittest.TestCase):
         self.assertEqual(self.pick(formats), "p720")
 
 
+# \x20 = the single-space lines real YouTube auto-captions contain
 YOUTUBE_AUTO_VTT = """WEBVTT
 Kind: captions
 Language: fr
 
 00:00:00.160 --> 00:00:02.990 align:start position:0%
- 
+\x20
 bonjour<00:00:00.480><c> tout</c><00:00:00.640><c> le</c><00:00:00.800><c> monde</c>
 
 00:00:02.990 --> 00:00:03.000 align:start position:0%
 bonjour tout le monde
- 
+\x20
 
 00:00:03.000 --> 00:00:05.270 align:start position:0%
 bonjour tout le monde
@@ -84,7 +85,7 @@ aujourd'hui<00:00:03.520><c> on</c><00:00:03.760><c> parle</c> &amp; on apprend
 
 00:00:05.270 --> 00:00:05.280 align:start position:0%
 aujourd'hui on parle &amp; on apprend
- 
+\x20
 
 00:00:09.000 --> 00:00:11.000 align:start position:0%
 aujourd'hui on parle &amp; on apprend

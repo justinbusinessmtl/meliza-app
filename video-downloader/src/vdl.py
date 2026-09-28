@@ -295,24 +295,28 @@ def _seconds(stamp):
 
 
 def parse_cues(text):
-    """Parse WebVTT or SRT into [(start, end, [lines])]."""
-    cues = []
-    blocks = re.split(r"\r?\n\s*\r?\n", text.replace("﻿", ""))
-    for block in blocks:
-        lines = block.strip("\r\n").splitlines()
-        idx = next((i for i, l in enumerate(lines) if "-->" in l), None)
-        if idx is None:
-            continue
-        start_s, end_s = lines[idx].split("-->", 1)
-        body = []
-        for line in lines[idx + 1:]:
+    """Parse WebVTT or SRT into [(start, end, [lines])].
+
+    Line-based on purpose: YouTube auto-captions put a line holding a single space
+    inside cues, so only a truly empty line ends a cue.
+    """
+    cues, current = [], None
+    lines = text.replace("﻿", "").splitlines()
+    for i, line in enumerate(lines):
+        if "-->" in line:
+            start_s, end_s = line.split("-->", 1)
+            current = (_seconds(start_s), _seconds((end_s.split() or [""])[0]), [])
+            cues.append(current)
+        elif line == "":
+            current = None
+        elif current is not None:
+            if line.strip().isdigit() and i + 1 < len(lines) and "-->" in lines[i + 1]:
+                continue  # SRT cue number
             clean = html.unescape(TAG_RE.sub("", line))
             clean = re.sub(r"\s+", " ", clean).strip()
             if clean:
-                body.append(clean)
-        if body:
-            cues.append((_seconds(start_s), _seconds(end_s.split()[0] if end_s.split() else end_s), body))
-    return cues
+                current[2].append(clean)
+    return [c for c in cues if c[2]]
 
 
 def dedupe_cues(cues):
