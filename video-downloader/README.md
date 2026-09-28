@@ -7,7 +7,7 @@ Download a video, its audio as MP3, or its transcript with one click. It works o
 |---|---|---|
 | **⬇ Video** | MP4 at **720p**. No 720p? → **1080p**. Neither? → the best below 1080p. Plays in QuickTime and on iPhone. | `Downloads/Videos` |
 | **♪ MP3** | Audio only, best quality MP3 | `Downloads/Audio` |
-| **📝 Transcript** | Clean text (`.txt`) + subtitles (`.srt`) | `Downloads/Transcripts` |
+| **📝 Transcript** | Clean text (`.txt`) | `Downloads/Transcripts` |
 
 Free, no account, nothing uploaded anywhere. Transcripts use the video's captions when they exist (instant).
 If a video has no captions, Whisper transcribes it **on your Mac**, which works well in French and English.
@@ -45,7 +45,7 @@ notification to see the file in Finder.** You can start several downloads at onc
 - [ ] Open any YouTube video, click **⬇ Video** → allow the browser prompt → a "Getting the video…" notification appears
 - [ ] A few seconds later: "Done ✓". Click it → Finder shows the `.mp4` in `Downloads/Videos`. Open it in QuickTime.
 - [ ] Same video, click **♪ MP3** → an `.mp3` appears in `Downloads/Audio`
-- [ ] Same video, click **📝 Transcript** → a `.txt` and `.srt` appear in `Downloads/Transcripts`
+- [ ] Same video, click **📝 Transcript** → a `.txt` appears in `Downloads/Transcripts`
 - [ ] Copy a link, click the Dock icon, press Enter → the video downloads
 
 ## If something goes wrong

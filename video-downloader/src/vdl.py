@@ -353,23 +353,6 @@ def to_paragraphs(entries):
     return [re.sub(r"\s+", " ", p).strip() for p in paragraphs]
 
 
-def _srt_time(t):
-    ms = int(round(t * 1000))
-    h, ms = divmod(ms, 3600000)
-    m, ms = divmod(ms, 60000)
-    s, ms = divmod(ms, 1000)
-    return f"{h:02}:{m:02}:{s:02},{ms:03}"
-
-
-def to_srt(entries):
-    rows = []
-    for i, (start, end, text) in enumerate(entries, 1):
-        if end <= start:
-            end = start + 1.5
-        rows.append(f"{i}\n{_srt_time(start)} --> {_srt_time(end)}\n{text}\n")
-    return "\n".join(rows)
-
-
 def pick_caption(info):
     """Choose the best caption track. Returns (lang_key, format_dict, is_auto) or None."""
     manual = info.get("subtitles") or {}
@@ -481,12 +464,9 @@ def transcript(url):
         raise RuntimeError("The transcript came back empty (the video may have no speech).")
     log(f"transcript source: {source}, {len(entries)} lines")
     title = info.get("title") or "transcript"
-    base = outdir / safe_filename(title)
-    txt_path = unique_path(base.with_suffix(".txt"))
-    srt_path = txt_path.with_suffix(".srt")
+    txt_path = unique_path((outdir / safe_filename(title)).with_suffix(".txt"))
     header = f"{title}\n{info.get('webpage_url') or url}\n\n"
     txt_path.write_text(header + "\n\n".join(to_paragraphs(entries)) + "\n", encoding="utf-8")
-    srt_path.write_text(to_srt(entries), encoding="utf-8")
     return txt_path, info, source
 
 

@@ -115,12 +115,11 @@ class TranscriptTest(unittest.TestCase):
         paragraphs = vdl.to_paragraphs(entries)
         self.assertEqual(paragraphs, ["bonjour tout le monde aujourd'hui on parle & on apprend", "nouvelle idée"])
 
-    def test_srt_roundtrip(self):
+    def test_srt_input_is_parsed(self):
+        # Whisper and some sites return SRT; it is read, but only a .txt is written.
         entries = vdl.dedupe_cues(vdl.parse_cues(SRT))
         self.assertEqual([e[2] for e in entries], ["Hello there.", "Nice to meet you."])
-        srt = vdl.to_srt(entries)
-        self.assertIn("00:00:01,000 --> 00:00:02,500\nHello there.", srt)
-        self.assertEqual([c[2] for c in vdl.parse_cues(srt)], [["Hello there."], ["Nice to meet you."]])
+        self.assertEqual((entries[0][0], entries[0][1]), (1.0, 2.5))
 
     def track(self, ext="vtt"):
         return [{"ext": "json3", "url": "u"}, {"ext": ext, "url": "u"}]
