@@ -1,7 +1,0 @@
-#!/bin/bash
-# Launcher for the Video Downloader engine. Installed to
-# ~/Library/Application Support/VideoDownloader/vdl
-# Apps started from Finder get a bare PATH, so add Homebrew's.
-export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
-SUPPORT="$HOME/Library/Application Support/VideoDownloader"
-exec "$SUPPORT/venv/bin/python" "$SUPPORT/vdl.py" "$@"
