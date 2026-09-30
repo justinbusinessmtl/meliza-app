@@ -3,7 +3,7 @@
 Télécharge une vidéo ou un MP3 en 2 clics. Ça marche sur YouTube et plus de 1 000 sites.
 
 - **Vidéo** : MP4 en 720p (sinon 1080p), lisible dans QuickTime et sur iPhone
-- **MP3** : l'audio seulement
+- **MP3** : seulement le son, d'un ou de plusieurs liens à la fois
 - Les fichiers arrivent dans **Téléchargements**
 - Environ 200 Mo sur ton Mac, sans Homebrew
 
@@ -17,7 +17,10 @@ Télécharge une vidéo ou un MP3 en 2 clics. Ça marche sur YouTube et plus de 
 
 1. Copie le lien d'une vidéo (⌘C).
 2. Clique sur **Video Downloader** dans le Dock. Le lien est déjà rempli.
-3. Appuie sur **Entrée** pour la vidéo, ou clique **MP3**.
+3. Appuie sur **Entrée** pour la vidéo, ou clique **MP3 (son seulement)** pour n'avoir que le son.
+
+**Plusieurs liens d'un coup** : colle-les dans la fenêtre, séparés par un espace (ou copie-les tous
+ensemble avant d'ouvrir l'app). Ils sont téléchargés un après l'autre.
 
 Une notification t'avertit quand c'est terminé.
 
